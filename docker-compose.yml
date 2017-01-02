@@ -1,0 +1,19 @@
+version: "2"
+services:
+    base:
+        build: .
+        image: "test/b2f-cpp"
+    shell:
+        image: "test/b2f-cpp"
+        command: bash
+        volumes:
+            - .:/app
+        working_dir: /app
+    web:
+        image: "test/b2f-cpp"
+        command: dumb-init /app/src/main 0.0.0.0 9080
+        ports:
+            - "3000:9080"
+        volumes:
+            - .:/app
+        working_dir: /app
